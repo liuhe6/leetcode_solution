@@ -1,3 +1,4 @@
+/*注意是向下取整，所以判断条件是<=*/
 class Solution {
 public:
     int mySqrt(int x) {
