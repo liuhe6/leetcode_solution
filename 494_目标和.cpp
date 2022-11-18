@@ -1,3 +1,26 @@
+// 全体数字的和sum-target = 2neg，问题退化为01背包问题，即从数字中寻找和为neg的组合
+// 下列为01背包问题进行状态压缩之后的解法
+// 为什么要倒序？因为两层循环，每次更新状态实际上是使用的外层循环上一次的值，内层循环倒序，可以避免使用外层循环本次过程中的值
+class Solution {
+public:
+    int findTargetSumWays(vector<int>& nums, int target) {
+        int sum = 0;
+        for(int n : nums) sum += n;
+        int diff = sum - target;
+        if(diff < 0 || diff % 2 != 0) return 0;
+        int neg = diff / 2;
+        vector<int> f(neg + 1);
+        f[0] = 1;
+        for(auto& x : nums) {
+            for(int j = neg; j >= x; j--) {
+                f[j] = f[j] + f[j - x];
+            }
+        }
+        return f[neg];
+    }
+};
+
+
 class Solution {
 public:
     int findTargetSumWays(vector<int>& nums, int target) {
