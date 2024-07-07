@@ -32,3 +32,18 @@ public:
         else return l + 1;
     }
 };
+
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+      // 在插入了target元素后整个数组的长度变为nums.size() + 1，所以两个指针的初始位置应该是int l = 0, r = nums.size(); 而不是int l = 0, r = nums.size() - 1;
+      // 假设 target 已经插入数组，我们需要在新的数组中查找第一个大于等于 target 的位置，这个位置就是 target 应该被插入的位置。
+        int l = 0, r = nums.size();
+        while(l < r) {
+            int mid = l + r >> 1;
+            if(nums[mid] >= target) r = mid;
+            else l = mid + 1;
+        }
+        return l;
+    }
+};
